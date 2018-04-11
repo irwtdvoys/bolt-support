@@ -1,0 +1,21 @@
+{
+    "name": "cruxoft/bolt-support",
+    "description": "Standalone support library for the Bolt Framework",
+    "type": "library",
+    "license": "Apache-2.0",
+	"keywords": [
+		"bolt"
+	],
+	"authors": [
+		{
+			"name": "Steve Adams",
+			"role": "Developer"
+		}
+	],
+    "require": {},
+	"autoload": {
+		"psr-4": {
+			"Bolt\\": "src"
+		}
+	}
+}
