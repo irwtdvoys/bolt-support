@@ -16,18 +16,6 @@
 			return array_values(array_diff($haystack, array($needle)));
 		}
 
-		public static function reKey(array $array): array
-		{
-			$results = array();
-
-			foreach ($array as $element)
-			{
-				$results[] = $element;
-			}
-
-			return $results;
-		}
-
 		public static function subValueSort(array $array, $subkey, $order = self::ORDER_ASCENDING): array
 		{
 			$subArray = array();
