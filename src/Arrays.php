@@ -35,7 +35,7 @@
 
 			foreach ($array as $key => $value)
 			{
-				$subArray[$key] = strtolower($value[$subkey]);
+				$subArray[$key] = is_string($value[$subkey]) ? strtolower($value[$subkey]) : $value[$subkey];
 			}
 
 			switch ($order)
