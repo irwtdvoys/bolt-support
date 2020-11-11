@@ -10,12 +10,12 @@
 		const STRENGTH_LOW = "low";
 		const STRENGTH_NUMERIC = "numeric";
 
-		const LENGTH_SHORT = "short";
-		const LENGTH_LONG = "long";
+		const MATCH_FIRST = "first";
+		const MATCH_LAST = "last";
 
-		public static function findOverlap($str1, $str2)
+		public static function findOverlaps($str1, $str2)
 		{
-			$return = array();
+			$result = array();
 			$sl1 = strlen($str1);
 			$sl2 = strlen($str2);
 			$max = ($sl1 > $sl2) ? $sl2 : $sl1;
@@ -23,46 +23,49 @@
 
 			while ($i <= $max)
 			{
-				$s1 = substr($str1, $sl1-$i);
+				$s1 = substr($str1, $sl1 - $i);
 				$s2 = substr($str2, 0, $i);
 
 				if ($s1 == $s2)
 				{
-					$return[] = $s1;
+					$result[] = $s1;
 				}
 
 				$i++;
 			}
 
-			if (!empty($return))
+			if (!empty($result))
 			{
-				return $return;
+				return $result;
 			}
 
 			return false;
 		}
 
-		public static function replaceOverlap($str1, $str2, $length = self::LENGTH_LONG)
+		public static function replaceOverlap($str1, $str2, $length = self::MATCH_LAST)
 		{
-			if ($overlap = Strings::findOverlap($str1, $str2))
-			{
-				switch ($length)
-				{
-					case self::LENGTH_SHORT:
-						$overlap = $overlap[0];
-						break;
-					case self::LENGTH_LONG:
-					default:
-						$overlap = $overlap[count($overlap) - 1];
-						break;
-				}
+			$overlaps = Strings::findOverlaps($str1, $str2);
 
-				$str1 = substr($str1, 0, -strlen($overlap));
-				$str2 = substr($str2, strlen($overlap));
-				return $str1 . $overlap . $str2;
+			if ($overlaps === false)
+			{
+				return false;
 			}
 
-			return false;
+			switch ($length)
+			{
+				case self::MATCH_FIRST:
+					$overlap = $overlaps[0];
+					break;
+				case self::MATCH_LAST:
+				default:
+					$overlap = $overlaps[count($overlaps) - 1];
+					break;
+			}
+
+			$str1 = substr($str1, 0, -strlen($overlap));
+			$str2 = substr($str2, strlen($overlap));
+
+			return $str1 . $overlap . $str2;
 		}
 
 		public static function random(int $length, $type = self::STRENGTH_HIGH): string
@@ -100,7 +103,7 @@
 
 		public static function isRegex(string $string): bool
 		{
-			return preg_match("/^\/[\s\S]+\/$/", $string) == 1 ? true : false;
+			return preg_match("/^\/[\s\S]+\/[gmixXsuUAJD]?$/", $string) == 1 ? true : false;
 		}
 
 		public static function isJson($value): bool
