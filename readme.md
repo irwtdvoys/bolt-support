@@ -1,4 +1,4 @@
-# Bolt-Support (v0.2.0)
+# Bolt-Support (v0.3.0)
 
 ## What is it?
 
@@ -15,3 +15,11 @@ $ composer require cruxoft/bolt-support
 ## Usage
 
 WiP
+
+## Tests
+
+Full unit tests are included and can be run with the following:
+
+```sh
+$ ./vendor/bin/phpunit tests --testdox
+```

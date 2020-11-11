@@ -1,4 +1,6 @@
 <?php
+	declare(strict_types=1);
+
 	namespace Bolt;
 
 	class Arrays
@@ -11,19 +13,9 @@
 
 		public static function removeElement($needle, $haystack): array
 		{
-			return array_values(array_diff($haystack, array($needle)));
-		}
+			$removed = array_diff($haystack, array($needle));
 
-		public static function reKey(array $array): array
-		{
-			$results = array();
-
-			foreach ($array as $element)
-			{
-				$results[] = $element;
-			}
-
-			return $results;
+			return (self::type($haystack) === self::TYPE_NUMERIC) ? array_values($removed) : $removed;
 		}
 
 		public static function subValueSort(array $array, $subkey, $order = self::ORDER_ASCENDING): array
@@ -33,7 +25,7 @@
 
 			foreach ($array as $key => $value)
 			{
-				$subArray[$key] = strtolower($value[$subkey]);
+				$subArray[$key] = is_string($value[$subkey]) ? strtolower($value[$subkey]) : $value[$subkey];
 			}
 
 			switch ($order)
@@ -87,7 +79,7 @@
 					$data = $value;
 				}
 
-				if (!is_array($array) && $array[$keys] === null)
+				if (!is_array($array) || !isset($array[$field]))
 				{
 					return $field;
 				}
