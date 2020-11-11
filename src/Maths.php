@@ -57,8 +57,8 @@
 			}
 
 			$points = array(
-				$data[(integer)floor($point)],
-				$data[(integer)ceil($point)]
+				$data[(int)floor($point)],
+				$data[(int)ceil($point)]
 			);
 
 			return self::mean($points);

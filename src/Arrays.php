@@ -6,6 +6,9 @@
 		const TYPE_NUMERIC = "numeric";
 		const TYPE_ASSOCIATIVE = "assoc";
 
+		const ORDER_ASCENDING = "ASC";
+		const ORDER_DESCENDING = "DESC";
+
 		public static function removeElement($needle, $haystack): array
 		{
 			return array_values(array_diff($haystack, array($needle)));
@@ -25,18 +28,22 @@
 
 		public static function subValueSort(array $array, $subkey, $order = self::ORDER_ASCENDING): array
 		{
-			foreach($array as $key => $value)
+			$subArray = array();
+			$results = array();
+
+			foreach ($array as $key => $value)
 			{
 				$subArray[$key] = strtolower($value[$subkey]);
 			}
 
-			if ($order == "ASC")
+			switch ($order)
 			{
-				asort($subArray);
-			}
-			else
-			{
-				arsort($subArray);
+				case self::ORDER_ASCENDING:
+					asort($subArray);
+					break;
+				case self::ORDER_DESCENDING:
+					arsort($subArray);
+					break;
 			}
 
 			foreach ($subArray as $key => $val)
