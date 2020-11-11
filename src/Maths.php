@@ -22,12 +22,12 @@
 			return $result;
 		}
 
-		public static function average($numbers)
+		public static function average(array $numbers): float
 		{
 			return self::mean($numbers);
 		}
 
-		public static function mean($numbers)
+		public static function mean(array $numbers): float
 		{
 			$count = 0;
 			$total = 0;
@@ -57,8 +57,8 @@
 			}
 
 			$points = array(
-				$data[(integer)floor($point)],
-				$data[(integer)ceil($point)]
+				$data[(int)floor($point)],
+				$data[(int)ceil($point)]
 			);
 
 			return self::mean($points);
@@ -86,6 +86,27 @@
 		public static function tau()
 		{
 			return 2 * pi();
+		}
+
+		/**
+		 * Greatest Common Divisor
+		 */
+		public static function gcd(int $a, int $b): int
+		{
+			if ($a == 0)
+			{
+				return $b;
+			}
+
+			return self::gcd($b % $a, $a);
+		}
+
+		/**
+		 * Lowest Common Multiple
+		 */
+		public static function lcm(int $a, int $b): int
+		{
+			return ($a * $b) / self::gcd($a, $b);
 		}
 	}
 ?>

@@ -1,8 +1,8 @@
 {
-    "name": "cruxoft/bolt-support",
-    "description": "Standalone support library for the Bolt Framework",
-    "type": "library",
-    "license": "Apache-2.0",
+	"name": "cruxoft/bolt-support",
+	"description": "Standalone support library for the Bolt Framework",
+	"type": "library",
+	"license": "Apache-2.0",
 	"keywords": [
 		"bolt"
 	],
@@ -12,7 +12,10 @@
 			"role": "Developer"
 		}
 	],
-    "require": {},
+	"require": {
+		"php": "^7",
+		"ext-json": "*"
+	},
 	"autoload": {
 		"psr-4": {
 			"Bolt\\": "src"
