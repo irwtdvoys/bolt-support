@@ -89,7 +89,7 @@
 					$data = $value;
 				}
 
-				if (!is_array($array) && $array[$keys] === null)
+				if (!is_array($array) || !isset($array[$field]))
 				{
 					return $field;
 				}
