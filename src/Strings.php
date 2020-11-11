@@ -103,7 +103,7 @@
 
 		public static function isRegex(string $string): bool
 		{
-			return preg_match("/^\/[\s\S]+\/$/", $string) == 1 ? true : false;
+			return preg_match("/^\/[\s\S]+\/[gmixXsuUAJD]?$/", $string) == 1 ? true : false;
 		}
 
 		public static function isJson($value): bool
