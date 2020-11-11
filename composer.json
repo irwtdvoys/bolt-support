@@ -16,6 +16,10 @@
 		"php": "^7",
 		"ext-json": "*"
 	},
+	"require-dev": {
+		"cruxoft/dump": "^0.2",
+		"phpunit/phpunit": "^9.4"
+	},
 	"autoload": {
 		"psr-4": {
 			"Bolt\\": "src"
