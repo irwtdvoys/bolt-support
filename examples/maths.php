@@ -1,11 +1,13 @@
 <?php
+	use Bolt\Maths;
+
 	require_once("../vendor/autoload.php");
 
 	function output($title, $value)
 	{
-		echo($title . ":\n");
+		echo($title . ":" . PHP_EOL);
 		var_dump($value);
-		echo("\n");
+		echo(PHP_EOL);
 	}
 
 	// Initialise data set
@@ -18,9 +20,9 @@
 		$data[] = rand(0, 10);
 	}
 
-	echo("Data Set: \n" . json_encode($data) . "\n\n");
+	echo("Data Set: " . PHP_EOL . json_encode($data) . PHP_EOL . PHP_EOL);
 
-	output("Mean", \Bolt\Maths::mean($data));
-	output("Median", \Bolt\Maths::median($data));
-	output("Mode", \Bolt\Maths::mode($data));
+	output("Mean", Maths::mean($data));
+	output("Median", Maths::median($data));
+	output("Mode", Maths::mode($data));
 ?>
