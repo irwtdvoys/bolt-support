@@ -3,12 +3,18 @@
 
 	class Arrays
 	{
-		public static function removeElement($needle, $haystack)
+		const TYPE_NUMERIC = "numeric";
+		const TYPE_ASSOCIATIVE = "assoc";
+
+		const ORDER_ASCENDING = "ASC";
+		const ORDER_DESCENDING = "DESC";
+
+		public static function removeElement($needle, $haystack): array
 		{
 			return array_values(array_diff($haystack, array($needle)));
 		}
 
-		public static function reKey($array)
+		public static function reKey(array $array): array
 		{
 			$results = array();
 
@@ -20,20 +26,24 @@
 			return $results;
 		}
 
-		public static function subValueSort($array, $subkey, $order = "ASC")
+		public static function subValueSort(array $array, $subkey, $order = self::ORDER_ASCENDING): array
 		{
-			foreach($array as $key => $value)
+			$subArray = array();
+			$results = array();
+
+			foreach ($array as $key => $value)
 			{
 				$subArray[$key] = strtolower($value[$subkey]);
 			}
 
-			if ($order == "ASC")
+			switch ($order)
 			{
-				asort($subArray);
-			}
-			else
-			{
-				arsort($subArray);
+				case self::ORDER_ASCENDING:
+					asort($subArray);
+					break;
+				case self::ORDER_DESCENDING:
+					arsort($subArray);
+					break;
 			}
 
 			foreach ($subArray as $key => $val)
@@ -52,11 +62,11 @@
 			}
 			elseif (array_values($array) === $array)
 			{
-				$result = "numeric";
+				$result = self::TYPE_NUMERIC;
 			}
 			else
 			{
-				$result = "assoc";
+				$result = self::TYPE_ASSOCIATIVE;
 			}
 
 			return $result;
@@ -66,7 +76,7 @@
 		{
 			foreach ($keys as $key => $value)
 			{
-				if (Arrays::type($keys) === "numeric" || is_integer($key))
+				if (Arrays::type($keys) === self::TYPE_NUMERIC || is_integer($key))
 				{
 					$field = $value;
 					$data = null;
@@ -96,13 +106,13 @@
 			return true;
 		}
 
-		public static function filter($keys, $array)
+		public static function filter(array $keys, array $array): array
 		{
 			$result = array();
 
 			foreach ($keys as $key => $value)
 			{
-				if (Arrays::type($keys) === "numeric" || is_integer($key))
+				if (Arrays::type($keys) === self::TYPE_NUMERIC || is_integer($key))
 				{
 					$field = $value;
 					$data = null;
