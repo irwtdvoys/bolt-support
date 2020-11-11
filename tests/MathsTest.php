@@ -1,0 +1,54 @@
+<?php
+	declare(strict_types=1);
+
+	use Bolt\Maths;
+	use PHPUnit\Framework\TestCase;
+
+	class MathsTest extends TestCase
+	{
+		public function testDouble()
+		{
+			$this->assertSame(2, Maths::double(1));
+			$this->assertSame(4, Maths::double(1, 2));
+		}
+
+		public function testMean()
+		{
+			$numbers = [3, 7, 6, 1, 5];
+			$this->assertSame(4.4, Maths::mean($numbers));
+		}
+
+		public function testMedian()
+		{
+			$numbers = [3, 7, 6, 1, 5];
+			$this->assertSame(5, Maths::median($numbers));
+
+			$numbers[] = 10;
+			$this->assertSame(5.5, Maths::median($numbers));
+		}
+
+		public function testMode()
+		{
+			$numbers = [3, 1, 6, 1, 5];
+			$this->assertSame(1, Maths::mode($numbers));
+
+			$numbers[] = 3;
+			$this->assertSame([3, 1], Maths::mode($numbers));
+		}
+
+		public function testTau()
+		{
+			$this->assertSame(6.283185307179586, Maths::tau());
+		}
+
+		public function testGcd()
+		{
+			$this->assertSame(6, Maths::gcd(12, 18));
+		}
+
+		public function testLcm()
+		{
+			$this->assertSame(36, Maths::lcm(12, 18));
+		}
+	}
+?>
