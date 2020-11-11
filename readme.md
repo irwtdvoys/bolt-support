@@ -15,3 +15,11 @@ $ composer require cruxoft/bolt-support
 ## Usage
 
 WiP
+
+## Tests
+
+Full unit tests are included and can be run with the following:
+
+```sh
+$ ./vendor/bin/phpunit tests --testdox
+```
