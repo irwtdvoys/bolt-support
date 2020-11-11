@@ -22,12 +22,12 @@
 			return $result;
 		}
 
-		public static function average($numbers)
+		public static function average(array $numbers): float
 		{
 			return self::mean($numbers);
 		}
 
-		public static function mean($numbers)
+		public static function mean(array $numbers): float
 		{
 			$count = 0;
 			$total = 0;

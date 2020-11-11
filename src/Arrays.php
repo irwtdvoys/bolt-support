@@ -6,12 +6,12 @@
 		const TYPE_NUMERIC = "numeric";
 		const TYPE_ASSOCIATIVE = "assoc";
 
-		public static function removeElement($needle, $haystack)
+		public static function removeElement($needle, $haystack): array
 		{
 			return array_values(array_diff($haystack, array($needle)));
 		}
 
-		public static function reKey($array)
+		public static function reKey(array $array): array
 		{
 			$results = array();
 
@@ -23,7 +23,7 @@
 			return $results;
 		}
 
-		public static function subValueSort($array, $subkey, $order = "ASC")
+		public static function subValueSort(array $array, $subkey, $order = self::ORDER_ASCENDING): array
 		{
 			foreach($array as $key => $value)
 			{
@@ -99,7 +99,7 @@
 			return true;
 		}
 
-		public static function filter($keys, $array)
+		public static function filter(array $keys, array $array): array
 		{
 			$result = array();
 

@@ -44,7 +44,7 @@
 		{
 			if ($overlap = Strings::findOverlap($str1, $str2))
 			{
-				switch($length)
+				switch ($length)
 				{
 					case self::LENGTH_SHORT:
 						$overlap = $overlap[0];
@@ -59,6 +59,7 @@
 				$str2 = substr($str2, strlen($overlap));
 				return $str1 . $overlap . $str2;
 			}
+
 			return false;
 		}
 
@@ -95,15 +96,15 @@
 			return $string;
 		}
 
-		public static function isRegex($string)
+		public static function isRegex(string $string): bool
 		{
-			$regex = "/^\/[\s\S]+\/$/";
-			return preg_match($regex, $string) == 1 ? true : false;
+			return preg_match("/^\/[\s\S]+\/$/", $string) == 1 ? true : false;
 		}
 
-		public static function isJson($string)
+		public static function isJson($value): bool
 		{
-			json_decode($string);
+			json_decode($value);
+
 			return (json_last_error() == JSON_ERROR_NONE);
 		}
 	}
