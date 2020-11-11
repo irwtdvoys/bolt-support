@@ -3,6 +3,14 @@
 
 	class Strings
 	{
+		const STRENGTH_HIGH = "high";
+		const STRENGTH_MEDIUM = "medium";
+		const STRENGTH_LOW = "low";
+		const STRENGTH_NUMERIC = "numeric";
+
+		const LENGTH_SHORT = "short";
+		const LENGTH_LONG = "long";
+
 		public static function findOverlap($str1, $str2)
 		{
 			$return = array();
@@ -32,16 +40,16 @@
 			return false;
 		}
 
-		public static function replaceOverlap($str1, $str2, $length = "long")
+		public static function replaceOverlap($str1, $str2, $length = self::LENGTH_LONG)
 		{
 			if ($overlap = Strings::findOverlap($str1, $str2))
 			{
 				switch($length)
 				{
-					case "short":
+					case self::LENGTH_SHORT:
 						$overlap = $overlap[0];
 						break;
-					case "long":
+					case self::LENGTH_LONG:
 					default:
 						$overlap = $overlap[count($overlap) - 1];
 						break;
@@ -54,22 +62,22 @@
 			return false;
 		}
 
-		public static function random($length, $type = "high")
+		public static function random(int $length, $type = self::STRENGTH_HIGH): string
 		{
 			$string = "";
 
 			switch ($type)
 			{
-				case "numeric":
+				case self::STRENGTH_NUMERIC:
 					$characters = "0123456789";
 					break;
-				case "high":
+				case self::STRENGTH_HIGH:
 					$characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz+=!-_";
 					break;
-				case "medium":
+				case self::STRENGTH_MEDIUM:
 					$characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz";
 					break;
-				case "low":
+				case self::STRENGTH_LOW:
 				default:
 					$characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz";
 					break;

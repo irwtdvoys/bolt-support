@@ -3,6 +3,9 @@
 
 	class Arrays
 	{
+		const TYPE_NUMERIC = "numeric";
+		const TYPE_ASSOCIATIVE = "assoc";
+
 		public static function removeElement($needle, $haystack)
 		{
 			return array_values(array_diff($haystack, array($needle)));
@@ -52,11 +55,11 @@
 			}
 			elseif (array_values($array) === $array)
 			{
-				$result = "numeric";
+				$result = self::TYPE_NUMERIC;
 			}
 			else
 			{
-				$result = "assoc";
+				$result = self::TYPE_ASSOCIATIVE;
 			}
 
 			return $result;
@@ -66,7 +69,7 @@
 		{
 			foreach ($keys as $key => $value)
 			{
-				if (Arrays::type($keys) === "numeric" || is_integer($key))
+				if (Arrays::type($keys) === self::TYPE_NUMERIC || is_integer($key))
 				{
 					$field = $value;
 					$data = null;
@@ -102,7 +105,7 @@
 
 			foreach ($keys as $key => $value)
 			{
-				if (Arrays::type($keys) === "numeric" || is_integer($key))
+				if (Arrays::type($keys) === self::TYPE_NUMERIC || is_integer($key))
 				{
 					$field = $value;
 					$data = null;
