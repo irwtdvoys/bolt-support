@@ -13,7 +13,9 @@
 
 		public static function removeElement($needle, $haystack): array
 		{
-			return array_values(array_diff($haystack, array($needle)));
+			$removed = array_diff($haystack, array($needle));
+
+			return (self::type($haystack) === self::TYPE_NUMERIC) ? array_values($removed) : $removed;
 		}
 
 		public static function subValueSort(array $array, $subkey, $order = self::ORDER_ASCENDING): array
