@@ -3,6 +3,8 @@
 
 	namespace Bolt;
 
+	use Exception;
+
 	class Maths
 	{
 		public static function double($value, $iterations = 1)
@@ -85,6 +87,7 @@
 
 		/**
 		 * Greatest Common Divisor
+		 * https://en.wikipedia.org/wiki/Greatest_common_divisor
 		 */
 		public static function gcd(int $a, int $b): int
 		{
@@ -98,10 +101,73 @@
 
 		/**
 		 * Lowest Common Multiple
+		 * https://en.wikipedia.org/wiki/Least_common_multiple
 		 */
 		public static function lcm(int $a, int $b): int
 		{
 			return ($a * $b) / self::gcd($a, $b);
+		}
+
+		/**
+		 * Modular Multiplicative Inverse
+		 * https://en.wikipedia.org/wiki/Modular_multiplicative_inverse
+		 */
+		public static function mmi(int $a, int $m): int
+		{
+			if ($m === 1)
+			{
+				return 1;
+			}
+
+			for ($i = 1; $i <= $m; $i++)
+			{
+				if ($a * $i % $m === 1)
+				{
+					return $i;
+				}
+			}
+
+			return 0;
+		}
+
+		/**
+		 * Chinese Remainder Theorem
+		 * https://en.wikipedia.org/wiki/Chinese_remainder_theorem
+		 */
+		public static function crt(array $n, array $r): int
+		{
+			if (count($n) !== count($r))
+			{
+				throw new Exception("Input arrays must be the same size");
+			}
+
+			$prod = 1;
+			$sum = 0;
+			$ln = count($n) - 1;
+
+			for ($p = 0; $p < $ln; $p++)
+			{
+				for ($i = $p + 1; $i <= $ln; $i++)
+				{
+					if (self::gcd($n[$i], $n[$p]) > 1)
+					{
+						throw new Exception("'n' not coprime");
+					}
+				}
+			}
+
+			for ($i = 0; $i <= $ln; $i++)
+			{
+				$prod *= $n[$i];
+			}
+
+			for ($i = 0; $i <= $ln; $i++)
+			{
+				$p = $prod / $n[$i];
+				$sum += $r[$i] * self::mmi($p, $n[$i]) * $p;
+			}
+
+			return $sum % $prod;
 		}
 	}
 ?>
