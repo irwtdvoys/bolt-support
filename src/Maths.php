@@ -136,6 +136,11 @@
 		 */
 		public static function crt(array $n, array $r): int
 		{
+			if (count($n) !== count($r))
+			{
+				throw new Exception("Input arrays must be the same size");
+			}
+
 			$prod = 1;
 			$sum = 0;
 			$ln = count($n) - 1;
