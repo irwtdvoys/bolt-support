@@ -3,6 +3,8 @@
 
 	namespace Bolt;
 
+	use Exception;
+
 	class Maths
 	{
 		public static function double($value, $iterations = 1)
@@ -102,6 +104,63 @@
 		public static function lcm(int $a, int $b): int
 		{
 			return ($a * $b) / self::gcd($a, $b);
+		}
+
+		/**
+		 * Modular Multiplicative Inverse
+		 * https://en.wikipedia.org/wiki/Modular_multiplicative_inverse
+		 */
+		public static function mmi(int $a, int $b): int
+		{
+			if ($b === 1)
+			{
+				return 1;
+			}
+
+			for ($i = 1; $i <= $b; $i++)
+			{
+				if ($a * $i % $b === 1)
+				{
+					return $i;
+				}
+			}
+
+			return 0;
+		}
+
+		/**
+		 * Chinese Remainder Theorem
+		 * https://en.wikipedia.org/wiki/Chinese_remainder_theorem
+		 */
+		public static function crt(array $n, array $a): int
+		{
+			$prod = 1;
+			$sum = 0;
+			$ln = sizeof($n) - 1;
+
+			for ($p = 0; $p < $ln; $p++)
+			{
+				for ($i = $p + 1; $i <= $ln; $i++)
+				{
+					if (self::gcd($n[$i], $n[$p]) > 1)
+					{
+						throw new Exception("'n' not coprime");
+					}
+				}
+			}
+
+			for ($i = 0; $i <= $ln; $i++)
+			{
+				$prod *= $n[$i];
+			}
+
+			for ($i = 0; $i <= $ln; $i++)
+			{
+				$p = $prod / $n[$i];
+				$sum += $a[$i] * self::mmi($p, $n[$i]) * $p;
+			}
+
+			return $sum % $prod;
 		}
 	}
 ?>
