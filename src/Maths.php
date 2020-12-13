@@ -112,16 +112,16 @@
 		 * Modular Multiplicative Inverse
 		 * https://en.wikipedia.org/wiki/Modular_multiplicative_inverse
 		 */
-		public static function mmi(int $a, int $b): int
+		public static function mmi(int $a, int $m): int
 		{
-			if ($b === 1)
+			if ($m === 1)
 			{
 				return 1;
 			}
 
-			for ($i = 1; $i <= $b; $i++)
+			for ($i = 1; $i <= $m; $i++)
 			{
-				if ($a * $i % $b === 1)
+				if ($a * $i % $m === 1)
 				{
 					return $i;
 				}
@@ -134,11 +134,11 @@
 		 * Chinese Remainder Theorem
 		 * https://en.wikipedia.org/wiki/Chinese_remainder_theorem
 		 */
-		public static function crt(array $n, array $a): int
+		public static function crt(array $n, array $r): int
 		{
 			$prod = 1;
 			$sum = 0;
-			$ln = sizeof($n) - 1;
+			$ln = count($n) - 1;
 
 			for ($p = 0; $p < $ln; $p++)
 			{
@@ -159,7 +159,7 @@
 			for ($i = 0; $i <= $ln; $i++)
 			{
 				$p = $prod / $n[$i];
-				$sum += $a[$i] * self::mmi($p, $n[$i]) * $p;
+				$sum += $r[$i] * self::mmi($p, $n[$i]) * $p;
 			}
 
 			return $sum % $prod;
