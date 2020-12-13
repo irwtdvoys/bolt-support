@@ -50,5 +50,23 @@
 		{
 			$this->assertSame(36, Maths::lcm(12, 18));
 		}
+
+		public function testMmi()
+		{
+			$this->assertSame(12, Maths::mmi(10, 17));
+		}
+
+		public function testCrt()
+		{
+			$numbers = [3, 4, 5];
+			$remainders = [2, 3, 1];
+
+			$this->assertSame(11, Maths::crt($numbers, $remainders));
+
+			$numbers = [5, 7];
+			$remainders = [1, 3];
+
+			$this->assertSame(31, Maths::crt($numbers, $remainders));
+		}
 	}
 ?>
