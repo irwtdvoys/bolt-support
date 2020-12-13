@@ -87,6 +87,7 @@
 
 		/**
 		 * Greatest Common Divisor
+		 * https://en.wikipedia.org/wiki/Greatest_common_divisor
 		 */
 		public static function gcd(int $a, int $b): int
 		{
@@ -100,6 +101,7 @@
 
 		/**
 		 * Lowest Common Multiple
+		 * https://en.wikipedia.org/wiki/Least_common_multiple
 		 */
 		public static function lcm(int $a, int $b): int
 		{
