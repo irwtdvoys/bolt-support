@@ -7,7 +7,7 @@
 
 	class Maths
 	{
-		public static function double($value, $iterations = 1)
+		public static function double(int|float $value, int $iterations = 1): int|float
 		{
 			$result = $value;
 
