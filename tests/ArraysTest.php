@@ -44,7 +44,6 @@
 
 		public function testType()
 		{
-			$this->assertFalse(Arrays::type(new stdClass()), "Not an array");
 			$this->assertSame(Arrays::TYPE_NUMERIC, Arrays::type([1, 2, 3]), "Numeric array");
 			$this->assertSame(Arrays::TYPE_ASSOCIATIVE, Arrays::type(["a" => 1, "b" => 2, "c" => 3]), "Associative array");
 			$this->assertSame(Arrays::TYPE_ASSOCIATIVE, Arrays::type(["a" => 1, 2, 3]), "Combined array");
