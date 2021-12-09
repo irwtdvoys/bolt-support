@@ -10,6 +10,9 @@
 		{
 			$this->assertSame(2, Maths::double(1));
 			$this->assertSame(4, Maths::double(1, 2));
+
+			$this->assertSame(5.0, Maths::double(2.5));
+			$this->assertSame(8.8, Maths::double(1.1, 3));
 		}
 
 		public function testMean()
@@ -21,7 +24,7 @@
 		public function testMedian()
 		{
 			$numbers = [3, 7, 6, 1, 5];
-			$this->assertSame(5, Maths::median($numbers));
+			$this->assertSame(5.0, Maths::median($numbers));
 
 			$numbers[] = 10;
 			$this->assertSame(5.5, Maths::median($numbers));

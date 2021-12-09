@@ -18,7 +18,7 @@
 			return (self::type($haystack) === self::TYPE_NUMERIC) ? array_values($removed) : $removed;
 		}
 
-		public static function subValueSort(array $array, $subkey, $order = self::ORDER_ASCENDING): array
+		public static function subValueSort(array $array, string $subkey, $order = self::ORDER_ASCENDING): array
 		{
 			$subArray = array();
 			$results = array();
@@ -46,13 +46,9 @@
 			return $results;
 		}
 
-		public static function type($array)
+		public static function type(array $array): string
 		{
-			if (!is_array($array))
-			{
-				$result = false;
-			}
-			elseif (array_values($array) === $array)
+			if (array_values($array) === $array)
 			{
 				$result = self::TYPE_NUMERIC;
 			}

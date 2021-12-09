@@ -13,7 +13,7 @@
 		const MATCH_FIRST = "first";
 		const MATCH_LAST = "last";
 
-		public static function findOverlaps($str1, $str2)
+		public static function findOverlaps(string $str1, string $str2): array|false
 		{
 			$result = array();
 			$sl1 = strlen($str1);
@@ -42,7 +42,7 @@
 			return false;
 		}
 
-		public static function replaceOverlap($str1, $str2, $length = self::MATCH_LAST)
+		public static function replaceOverlap(string $str1, string $str2, $type = self::MATCH_LAST): string|false
 		{
 			$overlaps = Strings::findOverlaps($str1, $str2);
 
@@ -51,7 +51,7 @@
 				return false;
 			}
 
-			switch ($length)
+			switch ($type)
 			{
 				case self::MATCH_FIRST:
 					$overlap = $overlaps[0];
@@ -103,7 +103,7 @@
 
 		public static function isRegex(string $string): bool
 		{
-			return preg_match("/^\/[\s\S]+\/[gmixXsuUAJD]?$/", $string) == 1 ? true : false;
+			return !(preg_match("/^\/[\s\S]+\/[gmixXsuUAJD]?$/", $string) !== 1);
 		}
 
 		public static function isJson($value): bool
