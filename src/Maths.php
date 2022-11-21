@@ -169,5 +169,14 @@
 
 			return $sum % $prod;
 		}
+
+		/**
+		 * Calculate nth Triangular number
+		 * https://en.wikipedia.org/wiki/Triangular_number
+		 */
+		public static function triangular(int $n): int
+		{
+			return ($n * ($n + 1)) / 2;
+		}
 	}
 ?>
