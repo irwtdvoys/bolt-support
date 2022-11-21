@@ -71,5 +71,18 @@
 
 			$this->assertSame(31, Maths::crt($numbers, $remainders));
 		}
+
+		public function testTriangular()
+		{
+			$expected = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55];
+			$results = [];
+
+			for ($n = 1; $n <= 10; $n++)
+			{
+				$results[] = Maths::triangular($n);
+			}
+
+			$this->assertSame($expected, $results);
+		}
 	}
 ?>
