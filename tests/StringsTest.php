@@ -1,6 +1,8 @@
 <?php
 	declare(strict_types=1);
 
+	use Bolt\Enums\Strings\Matches;
+	use Bolt\Enums\Strings\Strength;
 	use Bolt\Strings;
 	use PHPUnit\Framework\TestCase;
 
@@ -17,18 +19,18 @@
 		{
 
 			$this->assertFalse(Strings::replaceOverlap("intergalactic", "planetary"), "Expected no match");
-			$this->assertSame("airplanetary", Strings::replaceOverlap("airplane", "planetary", Strings::MATCH_FIRST), "Unexpected result on single first match");
-			$this->assertSame("airplanetary", Strings::replaceOverlap("airplane", "planetary", Strings::MATCH_LAST), "Unexpected result on single last match");
-			$this->assertSame("abxcdexcdexfg", Strings::replaceOverlap("abxcdex", "xcdexfg", Strings::MATCH_FIRST), "Unexpected result on multiple first match");
-			$this->assertSame("abxcdexfg", Strings::replaceOverlap("abxcdex", "xcdexfg", Strings::MATCH_LAST), "Unexpected result on multiple last match");
+			$this->assertSame("airplanetary", Strings::replaceOverlap("airplane", "planetary", Matches::First), "Unexpected result on single first match");
+			$this->assertSame("airplanetary", Strings::replaceOverlap("airplane", "planetary", Matches::Last), "Unexpected result on single last match");
+			$this->assertSame("abxcdexcdexfg", Strings::replaceOverlap("abxcdex", "xcdexfg", Matches::First), "Unexpected result on multiple first match");
+			$this->assertSame("abxcdexfg", Strings::replaceOverlap("abxcdex", "xcdexfg", Matches::Last), "Unexpected result on multiple last match");
 		}
 
 		public function testRandom()
 		{
-			$numeric = Strings::random(100, Strings::STRENGTH_NUMERIC);
-			$low = Strings::random(10000, Strings::STRENGTH_LOW);
-			$medium = Strings::random(10000, Strings::STRENGTH_MEDIUM);
-			$high = Strings::random(10000, Strings::STRENGTH_HIGH);
+			$numeric = Strings::random(100, Strength::Numeric);
+			$low = Strings::random(10000, Strength::Low);
+			$medium = Strings::random(10000, Strength::Medium);
+			$high = Strings::random(10000, Strength::High);
 
 			$this->assertIsString($numeric);
 			$this->assertSame(100, strlen($numeric));
