@@ -1,4 +1,4 @@
-# Bolt-Support (v0.4.0)
+# Bolt-Support (v0.5.0)
 
 ## What is it?
 
