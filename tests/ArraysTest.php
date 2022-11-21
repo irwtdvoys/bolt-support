@@ -2,6 +2,8 @@
 	declare(strict_types=1);
 
 	use Bolt\Arrays;
+	use Bolt\Enums\Arrays\Orders;
+	use Bolt\Enums\Arrays\Types;
 	use PHPUnit\Framework\TestCase;
 
 	class ArraysTest extends TestCase
@@ -22,8 +24,8 @@
 				$data[] = ["id" => rand(0, 50)];
 			}
 
-			$asc = Arrays::subValueSort($data, "id", Arrays::ORDER_ASCENDING);
-			$desc = Arrays::subValueSort($data, "id", Arrays::ORDER_DESCENDING);
+			$asc = Arrays::subValueSort($data, "id", Orders::Ascending);
+			$desc = Arrays::subValueSort($data, "id", Orders::Descending);
 
 			$current = 0;
 
@@ -44,12 +46,11 @@
 
 		public function testType()
 		{
-			$this->assertFalse(Arrays::type(new stdClass()), "Not an array");
-			$this->assertSame(Arrays::TYPE_NUMERIC, Arrays::type([1, 2, 3]), "Numeric array");
-			$this->assertSame(Arrays::TYPE_ASSOCIATIVE, Arrays::type(["a" => 1, "b" => 2, "c" => 3]), "Associative array");
-			$this->assertSame(Arrays::TYPE_ASSOCIATIVE, Arrays::type(["a" => 1, 2, 3]), "Combined array");
-			$this->assertSame(Arrays::TYPE_NUMERIC, Arrays::type([1, 2, 3, [4, 5, 6]]), "Nested numeric array");
-			$this->assertSame(Arrays::TYPE_ASSOCIATIVE, Arrays::type(["a" => 1, 2, 3, [4, 5, 6]]), "Nested associative array");
+			$this->assertSame(Types::Numeric, Arrays::type([1, 2, 3]), "Numeric array");
+			$this->assertSame(Types::Associative, Arrays::type(["a" => 1, "b" => 2, "c" => 3]), "Associative array");
+			$this->assertSame(Types::Associative, Arrays::type(["a" => 1, 2, 3]), "Combined array");
+			$this->assertSame(Types::Numeric, Arrays::type([1, 2, 3, [4, 5, 6]]), "Nested numeric array");
+			$this->assertSame(Types::Associative, Arrays::type(["a" => 1, 2, 3, [4, 5, 6]]), "Nested associative array");
 		}
 
 		public function testCheck()

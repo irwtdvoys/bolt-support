@@ -7,7 +7,7 @@
 
 	class Maths
 	{
-		public static function double($value, $iterations = 1)
+		public static function double(int|float $value, int $iterations = 1): int|float
 		{
 			$result = $value;
 
@@ -41,7 +41,7 @@
 			return ($total === 0 || $count === 0) ? 0 : $total / $count;
 		}
 
-		public static function median($numbers)
+		public static function median(array $numbers): float
 		{
 			asort($numbers);
 
@@ -61,7 +61,7 @@
 			return self::mean($points);
 		}
 
-		public static function mode($numbers)
+		public static function mode(array $numbers)
 		{
 			$counts = array_count_values($numbers);
 
@@ -80,7 +80,7 @@
 			return count($results) === 1 ? $results[0] : $results;
 		}
 
-		public static function tau()
+		public static function tau(): float
 		{
 			return 2 * pi();
 		}
@@ -168,6 +168,15 @@
 			}
 
 			return $sum % $prod;
+		}
+
+		/**
+		 * Calculate nth Triangular number
+		 * https://en.wikipedia.org/wiki/Triangular_number
+		 */
+		public static function triangular(int $n): int
+		{
+			return ($n * ($n + 1)) / 2;
 		}
 	}
 ?>
