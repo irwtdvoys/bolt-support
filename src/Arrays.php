@@ -3,22 +3,19 @@
 
 	namespace Bolt;
 
+	use Bolt\Enums\Arrays\Orders;
+	use Bolt\Enums\Arrays\Types;
+
 	class Arrays
 	{
-		const TYPE_NUMERIC = "numeric";
-		const TYPE_ASSOCIATIVE = "assoc";
-
-		const ORDER_ASCENDING = "ASC";
-		const ORDER_DESCENDING = "DESC";
-
 		public static function removeElement($needle, $haystack): array
 		{
 			$removed = array_diff($haystack, array($needle));
 
-			return (self::type($haystack) === self::TYPE_NUMERIC) ? array_values($removed) : $removed;
+			return (self::type($haystack) === Types::Numeric) ? array_values($removed) : $removed;
 		}
 
-		public static function subValueSort(array $array, string $subkey, $order = self::ORDER_ASCENDING): array
+		public static function subValueSort(array $array, string $subkey, Orders $order = Orders::Ascending): array
 		{
 			$subArray = array();
 			$results = array();
@@ -30,10 +27,10 @@
 
 			switch ($order)
 			{
-				case self::ORDER_ASCENDING:
+				case Orders::Ascending:
 					asort($subArray);
 					break;
-				case self::ORDER_DESCENDING:
+				case Orders::Descending:
 					arsort($subArray);
 					break;
 			}
@@ -46,25 +43,16 @@
 			return $results;
 		}
 
-		public static function type(array $array): string
+		public static function type(array $array): Types
 		{
-			if (array_values($array) === $array)
-			{
-				$result = self::TYPE_NUMERIC;
-			}
-			else
-			{
-				$result = self::TYPE_ASSOCIATIVE;
-			}
-
-			return $result;
+			return (array_values($array) === $array) ? Types::Numeric : Types::Associative;
 		}
 
 		public static function check($keys, $array)
 		{
 			foreach ($keys as $key => $value)
 			{
-				if (Arrays::type($keys) === self::TYPE_NUMERIC || is_integer($key))
+				if (Arrays::type($keys) === Types::Numeric || is_integer($key))
 				{
 					$field = $value;
 					$data = null;
@@ -100,7 +88,7 @@
 
 			foreach ($keys as $key => $value)
 			{
-				if (Arrays::type($keys) === self::TYPE_NUMERIC || is_integer($key))
+				if (Arrays::type($keys) === Types::Numeric || is_integer($key))
 				{
 					$field = $value;
 					$data = null;
