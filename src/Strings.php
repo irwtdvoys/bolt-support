@@ -3,16 +3,11 @@
 
 	namespace Bolt;
 
+	use Bolt\Enums\Strings\Matches;
+	use Bolt\Enums\Strings\Strength;
+
 	class Strings
 	{
-		const STRENGTH_HIGH = "high";
-		const STRENGTH_MEDIUM = "medium";
-		const STRENGTH_LOW = "low";
-		const STRENGTH_NUMERIC = "numeric";
-
-		const MATCH_FIRST = "first";
-		const MATCH_LAST = "last";
-
 		public static function findOverlaps(string $str1, string $str2): array|false
 		{
 			$result = array();
@@ -42,7 +37,7 @@
 			return false;
 		}
 
-		public static function replaceOverlap(string $str1, string $str2, $type = self::MATCH_LAST): string|false
+		public static function replaceOverlap(string $str1, string $str2, Matches $type = Matches::Last): string|false
 		{
 			$overlaps = Strings::findOverlaps($str1, $str2);
 
@@ -51,16 +46,11 @@
 				return false;
 			}
 
-			switch ($type)
+			$overlap = match ($type)
 			{
-				case self::MATCH_FIRST:
-					$overlap = $overlaps[0];
-					break;
-				case self::MATCH_LAST:
-				default:
-					$overlap = $overlaps[count($overlaps) - 1];
-					break;
-			}
+				Matches::First => $overlaps[0],
+				default => $overlaps[count($overlaps) - 1],
+			};
 
 			$str1 = substr($str1, 0, -strlen($overlap));
 			$str2 = substr($str2, strlen($overlap));
@@ -68,26 +58,17 @@
 			return $str1 . $overlap . $str2;
 		}
 
-		public static function random(int $length, $type = self::STRENGTH_HIGH): string
+		public static function random(int $length, Strength $type = Strength::High): string
 		{
 			$string = "";
 
-			switch ($type)
+			$characters = match ($type)
 			{
-				case self::STRENGTH_NUMERIC:
-					$characters = "0123456789";
-					break;
-				case self::STRENGTH_HIGH:
-					$characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz+=!-_";
-					break;
-				case self::STRENGTH_MEDIUM:
-					$characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz";
-					break;
-				case self::STRENGTH_LOW:
-				default:
-					$characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz";
-					break;
-			}
+				Strength::Numeric => "0123456789",
+				Strength::Low => "ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz",
+				Strength::Medium => "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz",
+				default => "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZacbdefghijklmnopqrstuvwxyz+=!-_",
+			};
 
 			$charLoop = 0;
 
