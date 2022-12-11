@@ -52,6 +52,7 @@
 		public function testLcm()
 		{
 			$this->assertSame(36, Maths::lcm(12, 18));
+			$this->assertSame(510, Maths::lcm(10, 15, 17));
 		}
 
 		public function testMmi()
