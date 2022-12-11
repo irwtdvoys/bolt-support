@@ -109,8 +109,14 @@
 			{
 				throw new Exception("2 or more values required");
 			}
+			elseif (count($values) === 2)
+			{
+				return ($values[0] * $values[1]) / self::gcd($values[0], $values[1]);
+			}
 
-			return ($values[0] * $values[1]) / self::gcd($values[0], $values[1]);
+			$a = array_pop($values);
+
+			return self::lcm($a, self::lcm(...$values));
 		}
 
 		/**
