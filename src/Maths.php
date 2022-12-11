@@ -103,9 +103,14 @@
 		 * Lowest Common Multiple
 		 * https://en.wikipedia.org/wiki/Least_common_multiple
 		 */
-		public static function lcm(int $a, int $b): int
+		public static function lcm(int ...$values): int
 		{
-			return ($a * $b) / self::gcd($a, $b);
+			if (count($values) < 2)
+			{
+				throw new Exception("2 or more values required");
+			}
+
+			return ($values[0] * $values[1]) / self::gcd($values[0], $values[1]);
 		}
 
 		/**
