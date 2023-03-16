@@ -1,7 +1,7 @@
 <?php
 	use Bolt\Maths;
 
-	require_once("../vendor/autoload.php");
+	require_once(__DIR__ . "/../vendor/autoload.php");
 
 	function output($title, $value)
 	{
