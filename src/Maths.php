@@ -105,11 +105,13 @@
 		 */
 		public static function lcm(int ...$values): int
 		{
-			if (count($values) < 2)
+			$count = count($values);
+
+			if ($count < 2)
 			{
 				throw new Exception("2 or more values required");
 			}
-			elseif (count($values) === 2)
+			elseif ($count === 2)
 			{
 				return ($values[0] * $values[1]) / self::gcd($values[0], $values[1]);
 			}
