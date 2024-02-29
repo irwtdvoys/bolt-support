@@ -93,5 +93,10 @@
 
 			return (json_last_error() == JSON_ERROR_NONE);
 		}
+
+		public static function diff(string $a, string $b): array
+		{
+			return array_diff_assoc(str_split($a), str_split($b));
+		}
 	}
 ?>
