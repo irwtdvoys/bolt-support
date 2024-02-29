@@ -64,5 +64,11 @@
 			$this->assertFalse(Strings::isJson('{1}'));
 			$this->assertFalse(Strings::isJson('This is invalid'));
 		}
+
+		public function testDiff()
+		{
+			$this->assertSame([2 => "i", 3 => "s"], Strings::diff("This", "That"));
+			$this->assertSame([3 => "t"], Strings::diff("testing", "tesTing"));
+		}
 	}
 ?>

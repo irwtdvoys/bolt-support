@@ -191,5 +191,47 @@
 		{
 			return ($n * ($n + 1)) / 2;
 		}
+
+		/**
+		 * Calculate the roots of a quadratic equation
+		 * In the format `ax^2 + bx + c`
+		 *
+		 * @return string[]|float[]|int[]
+		 * @throws Exception
+		 */
+		public static function quadraticRoots($a, $b, $c): array
+		{
+			if ($a == 0)
+			{
+				throw new Exception("Equation is linear not quadratic");
+			}
+
+			$delta = pow($b, 2) - 4 * $a * $c;
+			$sqrt_val = sqrt(abs($delta));
+
+			if ($delta > 0)
+			{
+				// Roots are real and different
+				return [
+					(-$b + $sqrt_val) / (2 * $a),
+					(-$b - $sqrt_val) / (2 * $a)
+				];
+			}
+			else if ($delta == 0)
+			{
+				// Roots are real and the same
+				return [
+					-$b / (2 * $a)
+				];
+			}
+			else
+			{
+				// Roots are complex
+				return [
+					-$b / (2 * $a) . " + i" . $sqrt_val / (2 * $a),
+					-$b / (2 * $a) . " - i" . $sqrt_val / (2 * $a)
+				];
+			}
+		}
 	}
 ?>
