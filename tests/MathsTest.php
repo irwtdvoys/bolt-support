@@ -85,5 +85,16 @@
 
 			$this->assertSame($expected, $results);
 		}
+
+		public function testQuadraticRoots()
+		{
+			$this->assertEquals([5, 2], Maths::quadraticRoots(1, -7, 10));
+			$this->assertEquals([2, 5], Maths::quadraticRoots(-1, +7, -10));
+
+			$this->assertEquals(["-0.25 + i0.66143782776615", "-0.25 - i0.66143782776615"], Maths::quadraticRoots(2, 1, 1), "Complex roots result incorrect");
+			$this->assertEquals([1], Maths::quadraticRoots(1, -2, 1), "Single root result incorrect");
+
+			$this->expectException(Exception::class);
+		}
 	}
 ?>
