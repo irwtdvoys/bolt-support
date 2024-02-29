@@ -95,6 +95,7 @@
 			$this->assertEquals([1], Maths::quadraticRoots(1, -2, 1), "Single root result incorrect");
 
 			$this->expectException(Exception::class);
+			Maths::quadraticRoots(0, 0, 0);
 		}
 	}
 ?>
